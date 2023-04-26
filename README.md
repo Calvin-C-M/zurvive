@@ -4,6 +4,6 @@
 Lorem ipsum dolor sit amet
 
 ## Created by
-> Calvin Calfi Montolalu
-> Naufal Fahrezi
-> Deani Puteri Virdiana
+* Calvin Calfi Montolalu
+* Naufal Fahrezi
+* Deani Puteri Virdiana
