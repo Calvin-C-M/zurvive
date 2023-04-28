@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class CharacterBehaviour : MonoBehaviour
 {
-    public float speed = 10.0f;
+    private Rigidbody rb;
+    private Camera cam;
+    private GameObject ground;
+    public float walkingSpd = 10.0f;
+    public float runningSpd = 5.0f;
+    public float jumpHeight = 5.0f;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.rb = GetComponent<Rigidbody>();
+        this.cam = Camera.main;
+        this.ground = GameObject.Find("Map");
     }
 
     // Update is called once per frame
@@ -20,21 +28,37 @@ public class CharacterBehaviour : MonoBehaviour
 
     void Movement()
     {
-        if(Input.GetKey("w"))
+        float velocity = this.walkingSpd;
+        
+        if(Input.GetKey(KeyCode.LeftShift)) // Running
         {
-            this.transform.Translate(Vector3.forward * this.speed * Time.deltaTime);
+            velocity = this.walkingSpd + this.runningSpd;
         }
-        if(Input.GetKey("a"))
+        if(Input.GetKey("w")) // Move forwards
         {
-            this.transform.Translate(Vector3.left * this.speed * Time.deltaTime);
+            this.transform.Translate(Vector3.forward * velocity * Time.deltaTime);
         }
-        if(Input.GetKey("s"))
+        if(Input.GetKey("a")) // Strafe left
         {
-            this.transform.Translate(Vector3.back * this.speed * Time.deltaTime);
+            this.transform.Translate(Vector3.left * velocity * Time.deltaTime);
         }
-        if(Input.GetKey("d"))
+        if(Input.GetKey("s")) // Move backwards
         {
-            this.transform.Translate(Vector3.right * this.speed * Time.deltaTime);
+            this.transform.Translate(Vector3.back * velocity * Time.deltaTime);
+        }
+        if(Input.GetKey("d")) // Strafe right
+        {
+            this.transform.Translate(Vector3.right * velocity * Time.deltaTime);
+        }
+        if(Input.GetKeyDown(KeyCode.Space)) // Jumping
+        {
+            this.rb.velocity = new Vector3(0,this.jumpHeight,0);
+        }
+
+        // Debug Keys
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+            this.cam.transform.Translate(0,1,-5);
         }
     }
 }
