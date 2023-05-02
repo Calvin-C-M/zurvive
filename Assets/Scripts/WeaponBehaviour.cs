@@ -6,14 +6,16 @@ public class WeaponBehaviour : MonoBehaviour
 {
     public float damage = 3.0f;
     public float range = 15.0f;
-    public float fireRate = 0.8f;
+    public float fireRate = 0.5f;
     private bool allowFire = true;
     private ParticleSystem muzzleFlash;
+    private AudioSource firingSound;
 
     // Start is called before the first frame update
     void Start()
     {
         this.muzzleFlash = GetComponentInChildren<ParticleSystem>();
+        this.firingSound = GetComponentInChildren<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,8 @@ public class WeaponBehaviour : MonoBehaviour
 
     private void Fire()
     {
+        this.firingSound.Play();
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
