@@ -6,6 +6,7 @@ public class ZombieBehaviour : MonoBehaviour
 {
     private GameObject player;
     public float speed = 1.0f;
+    public float health = 30.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,12 @@ public class ZombieBehaviour : MonoBehaviour
     void Update()
     {
         this.Movement();
+    }
+
+    public void Damage()
+    {
+        // Debug.Log("Zombie is damaged");
+        this.health -= 10.0f;
     }
 
     private void Movement()
