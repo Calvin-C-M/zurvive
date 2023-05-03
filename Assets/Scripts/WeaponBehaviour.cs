@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[SerializeField]
 public class WeaponBehaviour : MonoBehaviour
 {
-    public float damage = 3.0f;
-    public float range = 15.0f;
-    public float fireRate = 0.5f;
+    public float damage;
+    public float range;
+    public float fireRate;
     private bool allowFire = true;
     private ParticleSystem muzzleFlash;
     private AudioSource firingSound;
@@ -16,6 +17,11 @@ public class WeaponBehaviour : MonoBehaviour
     {
         this.muzzleFlash = GetComponentInChildren<ParticleSystem>();
         this.firingSound = GetComponentInChildren<AudioSource>();
+        this.damage = 3.0f;
+        this.range = 15.0f;
+        this.fireRate = 0.1f;
+
+        this.muzzleFlash.Stop();
     }
 
     // Update is called once per frame
@@ -39,6 +45,7 @@ public class WeaponBehaviour : MonoBehaviour
     private void Fire()
     {
         this.firingSound.Play();
+        StartCoroutine(this.ToggleMuzzleFlash());
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -63,11 +70,18 @@ public class WeaponBehaviour : MonoBehaviour
 
     }
 
-    IEnumerator Shoot()
+    private IEnumerator Shoot()
     {
         this.allowFire = false;
         this.Fire();
         yield return new WaitForSeconds(this.fireRate);
         this.allowFire = true;
+    }
+
+    private IEnumerator ToggleMuzzleFlash()
+    {
+        this.muzzleFlash.Play();
+        yield return new WaitForSeconds(0.3f);
+        this.muzzleFlash.Stop();
     }
 }
