@@ -66,7 +66,7 @@ public class WeaponBehaviour : MonoBehaviour
             ZombieBehaviour zombieAttr = zombie.GetComponent<ZombieBehaviour>();
             if(zombieAttr != null)
             {
-                zombieAttr.Damage();
+                zombieAttr.TakeDamage(this.damage);
                 if(zombieAttr.health <= 0)
                 {
                     Destroy(zombie);

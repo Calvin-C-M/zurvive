@@ -59,9 +59,9 @@ public class ZombieBehaviour : MonoBehaviour
         this.allowAttack = true;
     }
 
-    public void TakeDamage()
+    public void TakeDamage(float damage)
     {
-        this.health -= 10.0f;
+        this.health -= damage;
     
         float currHealth = (this.health / this.initHealth) * 100;
         this.healthText.text = Mathf.Round(currHealth) + "%";
