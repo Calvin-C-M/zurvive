@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class CharacterBehaviour : MonoBehaviour
 {
+    public float walkingSpd;
+    public float runningSpd;
+    public float jumpHeight;
+    public float health;
     private Rigidbody rb;
     private Camera cam;
     private GameObject ground;
-    public float walkingSpd = 10.0f;
-    public float runningSpd = 5.0f;
-    public float jumpHeight = 5.0f;
+    private float initHealth;
 
 
     // Start is called before the first frame update
@@ -18,15 +20,25 @@ public class CharacterBehaviour : MonoBehaviour
         this.rb = GetComponent<Rigidbody>();
         this.cam = Camera.main;
         this.ground = GameObject.Find("Map");
+
+        this.walkingSpd = 10.0f;
+        this.runningSpd = 5.0f;
+        this.jumpHeight = 5.0f;
+        this.initHealth = 50.0f;
+        this.health = this.initHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
         this.Movement();
+        if(this.health < 0)
+        {
+            Debug.Log("Player is dead");
+        }
     }
 
-    void Movement()
+    private void Movement()
     {
         float velocity = this.walkingSpd;
         
@@ -60,5 +72,10 @@ public class CharacterBehaviour : MonoBehaviour
         {
             this.cam.transform.Translate(0,1,-5);
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        this.health -= damage;
     }
 }
