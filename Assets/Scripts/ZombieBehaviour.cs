@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ZombieBehaviour : MonoBehaviour
 {
-    private GameObject player;
     public float speed = 1.0f;
     public float health = 30.0f;
+
+    private GameObject player;
+    private TMP_Text healthText;
+    private float initHealth;
 
     // Start is called before the first frame update
     void Start()
     {
         this.player = GameObject.Find("Player");
+        this.healthText = GetComponentInChildren<TMP_Text>();
+        this.initHealth = this.health;
     }
 
     // Update is called once per frame
@@ -22,8 +28,10 @@ public class ZombieBehaviour : MonoBehaviour
 
     public void Damage()
     {
-        // Debug.Log("Zombie is damaged");
         this.health -= 10.0f;
+    
+        float currHealth = (this.health / this.initHealth) * 100;
+        this.healthText.text = Mathf.Round(currHealth) + "%";
     }
 
     private void Movement()
