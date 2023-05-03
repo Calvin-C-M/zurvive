@@ -8,18 +8,27 @@ public class WeaponBehaviour : MonoBehaviour
     public float damage;
     public float range;
     public float fireRate;
+    public int ammo;
+    private int initAmmo;
     private bool allowFire = true;
+    private bool isReloading = false;
     private ParticleSystem muzzleFlash;
     private AudioSource firingSound;
+    private AudioSource reloadSound;
 
     // Start is called before the first frame update
     void Start()
     {
+        AudioSource[] sounds = GetComponentsInChildren<AudioSource>();
+
         this.muzzleFlash = GetComponentInChildren<ParticleSystem>();
-        this.firingSound = GetComponentInChildren<AudioSource>();
+        this.firingSound = sounds[0];
+        this.reloadSound = sounds[1];
         this.damage = 3.0f;
         this.range = 15.0f;
         this.fireRate = 0.1f;
+        this.initAmmo = 30;
+        this.ammo = this.initAmmo;
 
         this.muzzleFlash.Stop();
     }
@@ -32,7 +41,7 @@ public class WeaponBehaviour : MonoBehaviour
 
     private void Controls()
     {
-        if(Input.GetMouseButton(0) && this.allowFire)
+        if(Input.GetMouseButton(0) && this.allowFire && this.ammo > 0 && !this.isReloading)
         {
             StartCoroutine(this.Shoot());
         }
@@ -44,6 +53,7 @@ public class WeaponBehaviour : MonoBehaviour
 
     private void Fire()
     {
+        this.ammo -= 1;
         this.firingSound.Play();
         StartCoroutine(this.ToggleMuzzleFlash());
 
@@ -67,7 +77,8 @@ public class WeaponBehaviour : MonoBehaviour
 
     private void Reload()
     {
-
+        StartCoroutine(this.PlayReload());
+        this.ammo = this.initAmmo;
     }
 
     private IEnumerator Shoot()
@@ -83,5 +94,14 @@ public class WeaponBehaviour : MonoBehaviour
         this.muzzleFlash.Play();
         yield return new WaitForSeconds(0.3f);
         this.muzzleFlash.Stop();
+    }
+
+    private IEnumerator PlayReload()
+    {
+        this.isReloading = true;
+        this.reloadSound.Play();
+        yield return new WaitForSeconds(1.0f);
+        this.isReloading = false;
+        this.reloadSound.Stop();
     }
 }
