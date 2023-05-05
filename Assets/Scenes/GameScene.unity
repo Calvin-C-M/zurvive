@@ -495,6 +495,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   health: 30
+  attackDmg: 0
+  attackRate: 0
 --- !u!1 &485811498
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,6 +729,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   health: 30
+  attackDmg: 0
+  attackRate: 0
 --- !u!1 &638739070
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,6 +862,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   health: 30
+  attackDmg: 0
+  attackRate: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -6213,7 +6219,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -6266,7 +6272,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -10701,7 +10707,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -15636,7 +15642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &861336853
 GameObject:
   m_ObjectHideFlags: 0
@@ -16346,6 +16352,7 @@ MonoBehaviour:
   walkingSpd: 10
   runningSpd: 5
   jumpHeight: 5
+  health: 0
 --- !u!1 &1438777240
 GameObject:
   m_ObjectHideFlags: 0

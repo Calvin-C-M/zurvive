@@ -12,16 +12,23 @@ public class WeaponBehaviour : MonoBehaviour
     private int initAmmo;
     private bool allowFire = true;
     private bool isReloading = false;
-    private ParticleSystem muzzleFlash;
+    private ParticleSystem[] muzzleParticles;
+    private GameObject muzzleLight;
     private AudioSource firingSound;
     private AudioSource reloadSound;
 
     // Start is called before the first frame update
     void Start()
     {
-        AudioSource[] sounds = GetComponentsInChildren<AudioSource>();
+        this.muzzleParticles = GetComponentsInChildren<ParticleSystem>();
+        foreach(ParticleSystem particle in this.muzzleParticles)
+        {
+            particle.Stop();
+        }        
+        this.muzzleLight = GameObject.Find("Light");
+        this.muzzleLight.SetActive(false);
 
-        this.muzzleFlash = GetComponentInChildren<ParticleSystem>();
+        AudioSource[] sounds = GetComponentsInChildren<AudioSource>();
         this.firingSound = sounds[0];
         this.reloadSound = sounds[1];
         this.damage = 3.0f;
@@ -29,8 +36,6 @@ public class WeaponBehaviour : MonoBehaviour
         this.fireRate = 0.1f;
         this.initAmmo = 30;
         this.ammo = this.initAmmo;
-
-        this.muzzleFlash.Stop();
     }
 
     // Update is called once per frame
@@ -91,9 +96,19 @@ public class WeaponBehaviour : MonoBehaviour
 
     private IEnumerator ToggleMuzzleFlash()
     {
-        this.muzzleFlash.Play();
+        foreach(ParticleSystem particle in this.muzzleParticles)
+        {
+            particle.Play();
+        }
+        this.muzzleLight.SetActive(true);
+
         yield return new WaitForSeconds(0.3f);
-        this.muzzleFlash.Stop();
+
+        foreach(ParticleSystem particle in this.muzzleParticles)
+        {
+            particle.Stop();
+        }
+        this.muzzleLight.SetActive(false);
     }
 
     private IEnumerator PlayReload()
