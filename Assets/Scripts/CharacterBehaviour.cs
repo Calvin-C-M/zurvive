@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CharacterBehaviour : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class CharacterBehaviour : MonoBehaviour
     private Rigidbody rb;
     private Camera cam;
     private GameObject ground;
+    private TMP_Text healthText;
     private float initHealth;
 
 
@@ -20,6 +22,7 @@ public class CharacterBehaviour : MonoBehaviour
         this.rb = GetComponent<Rigidbody>();
         this.cam = Camera.main;
         this.ground = GameObject.Find("Map");
+        this.healthText = GetComponentInChildren<TMP_Text>();
 
         this.walkingSpd = 10.0f;
         this.runningSpd = 5.0f;
@@ -35,6 +38,7 @@ public class CharacterBehaviour : MonoBehaviour
         if(this.health < 0)
         {
             Debug.Log("Player is dead");
+            Destroy(this.gameObject);
         }
     }
 
@@ -77,5 +81,7 @@ public class CharacterBehaviour : MonoBehaviour
     public void TakeDamage(float damage)
     {
         this.health -= damage;
+        float currHealth = (this.health / this.initHealth) * 100;
+        this.healthText.text = Mathf.Round(currHealth) + "%";
     }
 }
