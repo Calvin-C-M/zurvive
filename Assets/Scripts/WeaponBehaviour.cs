@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [SerializeField]
 public class WeaponBehaviour : MonoBehaviour
@@ -16,6 +17,7 @@ public class WeaponBehaviour : MonoBehaviour
     private GameObject muzzleLight;
     private AudioSource firingSound;
     private AudioSource reloadSound;
+    private TMP_Text ammoText;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,7 @@ public class WeaponBehaviour : MonoBehaviour
         this.muzzleLight.SetActive(false);
 
         AudioSource[] sounds = GetComponentsInChildren<AudioSource>();
+        
         this.firingSound = sounds[0];
         this.reloadSound = sounds[1];
         this.damage = 3.0f;
@@ -36,6 +39,9 @@ public class WeaponBehaviour : MonoBehaviour
         this.fireRate = 0.1f;
         this.initAmmo = 30;
         this.ammo = this.initAmmo;
+        
+        this.ammoText = GetComponentInChildren<TMP_Text>();
+         this.ChangeAmmoText();
     }
 
     // Update is called once per frame
@@ -59,6 +65,7 @@ public class WeaponBehaviour : MonoBehaviour
     private void Fire()
     {
         this.ammo -= 1;
+        this.ChangeAmmoText();
         this.firingSound.Play();
         StartCoroutine(this.ToggleMuzzleFlash());
 
@@ -84,6 +91,7 @@ public class WeaponBehaviour : MonoBehaviour
     {
         StartCoroutine(this.PlayReload());
         this.ammo = this.initAmmo;
+        this.ChangeAmmoText();
     }
 
     private IEnumerator Shoot()
@@ -118,5 +126,10 @@ public class WeaponBehaviour : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         this.isReloading = false;
         this.reloadSound.Stop();
+    }
+
+    private void ChangeAmmoText()
+    {
+        this.ammoText.text = this.ammo + " / " + this.initAmmo;
     }
 }

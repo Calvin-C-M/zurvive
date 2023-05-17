@@ -22,7 +22,7 @@ public class CharacterBehaviour : MonoBehaviour
         this.rb = GetComponent<Rigidbody>();
         this.cam = Camera.main;
         this.ground = GameObject.Find("Map");
-        this.healthText = GetComponentInChildren<TMP_Text>();
+        this.healthText = GetComponentsInChildren<TMP_Text>()[1];
 
         this.walkingSpd = 10.0f;
         this.runningSpd = 5.0f;
