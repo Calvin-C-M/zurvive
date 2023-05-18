@@ -16,6 +16,8 @@ public class CharacterBehaviour : MonoBehaviour
     private TMP_Text killCounterText;
     private TMP_Text healthText;
     private float initHealth;
+    private GameObject primary;
+    private GameObject secondary;
 
 
     // Start is called before the first frame update
@@ -26,6 +28,8 @@ public class CharacterBehaviour : MonoBehaviour
         this.ground = GameObject.Find("Map");
         this.healthText = GetComponentsInChildren<TMP_Text>()[1];
         this.killCounterText = GetComponentsInChildren<TMP_Text>()[2];
+        this.primary = GameObject.Find("Rifle");
+        this.secondary = GameObject.Find("Sword");
 
         this.killCounter = 0;
         this.walkingSpd = 10.0f;
@@ -33,12 +37,13 @@ public class CharacterBehaviour : MonoBehaviour
         this.jumpHeight = 5.0f;
         this.initHealth = 50.0f;
         this.health = this.initHealth;
+        this.secondary.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.Movement();
+        this.KeyInput();
         this.killCounterText.text = this.killCounter.ToString(); // Update kill counter text
         if(this.health < 0)
         {
@@ -47,8 +52,10 @@ public class CharacterBehaviour : MonoBehaviour
         }
     }
 
-    private void Movement()
+    private void KeyInput()
     {
+
+        // ============ MOVEMENT ============
         float velocity = this.walkingSpd;
         
         if(Input.GetKey(KeyCode.LeftShift)) // Running
@@ -76,7 +83,19 @@ public class CharacterBehaviour : MonoBehaviour
             this.rb.velocity = new Vector3(0,this.jumpHeight,0);
         }
 
-        // Debug Keys
+        // ============ SWITCH WEAPONS ============
+        if(Input.GetKeyDown("1"))
+        {
+            this.primary.SetActive(true);
+            this.secondary.SetActive(false);
+        }
+        if(Input.GetKeyDown("2"))
+        {
+            this.primary.SetActive(false);
+            this.secondary.SetActive(true);
+        }
+
+        // ============ DEBUG KEYS ============
         if(Input.GetKeyDown(KeyCode.F1))
         {
             this.cam.transform.Translate(0,1,-5);
