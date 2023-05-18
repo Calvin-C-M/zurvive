@@ -33,10 +33,6 @@ public class Spawner : MonoBehaviour
         {
             StartCoroutine(this.ChangeWave());
         }
-        else
-        {
-            Debug.Log("Zombie cannot spawn yet");
-        }
     }
 
     private void SpawnZombie()
