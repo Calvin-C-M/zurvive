@@ -9,9 +9,11 @@ public class CharacterBehaviour : MonoBehaviour
     public float runningSpd;
     public float jumpHeight;
     public float health;
+    public int killCounter;
     private Rigidbody rb;
     private Camera cam;
     private GameObject ground;
+    private TMP_Text killCounterText;
     private TMP_Text healthText;
     private float initHealth;
 
@@ -23,7 +25,9 @@ public class CharacterBehaviour : MonoBehaviour
         this.cam = Camera.main;
         this.ground = GameObject.Find("Map");
         this.healthText = GetComponentsInChildren<TMP_Text>()[1];
+        this.killCounterText = GetComponentsInChildren<TMP_Text>()[2];
 
+        this.killCounter = 0;
         this.walkingSpd = 10.0f;
         this.runningSpd = 5.0f;
         this.jumpHeight = 5.0f;
@@ -35,6 +39,7 @@ public class CharacterBehaviour : MonoBehaviour
     void Update()
     {
         this.Movement();
+        this.killCounterText.text = this.killCounter.ToString(); // Update kill counter text
         if(this.health < 0)
         {
             Debug.Log("Player is dead");
