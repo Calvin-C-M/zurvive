@@ -6,11 +6,12 @@ using TMPro;
 [SerializeField]
 public class WeaponBehaviour : MonoBehaviour
 {
+    public string weaponType;
     public float damage;
     public float range;
     public float fireRate;
-    public int ammo;
-    private int initAmmo;
+    public float ammo;
+    private float initAmmo;
     private bool allowFire = true;
     private bool isReloading = false;
     private ParticleSystem[] muzzleParticles;
@@ -18,30 +19,42 @@ public class WeaponBehaviour : MonoBehaviour
     private AudioSource firingSound;
     private AudioSource reloadSound;
     private TMP_Text ammoText;
+    private WeaponDict weaponDictionary;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        // Control weapon particle components
         this.muzzleParticles = GetComponentsInChildren<ParticleSystem>();
         foreach(ParticleSystem particle in this.muzzleParticles)
         {
             particle.Stop();
         }        
+
         this.muzzleLight = GameObject.Find("Light");
         this.muzzleLight.SetActive(false);
 
+        // Control weapon sound components
         AudioSource[] sounds = GetComponentsInChildren<AudioSource>();
-        
+        foreach(AudioSource sound in sounds) 
+        {
+            sound.volume = 0.5f;
+        }
         this.firingSound = sounds[0];
         this.reloadSound = sounds[1];
-        this.damage = 3.0f;
-        this.range = 15.0f;
-        this.fireRate = 0.1f;
-        this.initAmmo = 30;
+
+        // Control weapon attributes
+        this.weaponType = "rifle";
+        this.weaponDictionary = new WeaponDict();
+        this.damage = this.weaponDictionary.attribute[weaponType]["damage"];
+        this.range = this.weaponDictionary.attribute[weaponType]["range"];
+        this.fireRate = this.weaponDictionary.attribute[weaponType]["fireRate"];
+        this.initAmmo = this.weaponDictionary.attribute[weaponType]["initAmmo"];
         this.ammo = this.initAmmo;
         
         this.ammoText = GetComponentInChildren<TMP_Text>();
-         this.ChangeAmmoText();
+        this.ChangeAmmoText();
     }
 
     // Update is called once per frame

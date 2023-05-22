@@ -52,7 +52,6 @@ public class ZombieBehaviour : MonoBehaviour
         if(playerAttr != null)
         {
             playerAttr.TakeDamage(this.attackDmg);
-            Debug.Log(playerAttr.health);
         }
 
         yield return new WaitForSeconds(this.attackRate);

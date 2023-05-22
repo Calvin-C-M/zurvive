@@ -1,18 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class WeaponDict : MonoBehaviour
+public class WeaponDict
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public readonly Dictionary<string, Dictionary<string, float>> attribute = new Dictionary<string, Dictionary<string, float>>()
+        {
+            {"rifle", new Dictionary<string, float>()
+            {
+                {"damage", 3.0f},
+                {"range", 15.0f},
+                {"fireRate", 0.1f},
+                {"initAmmo", 30f}
+            }},
+        };
 }
