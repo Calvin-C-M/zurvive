@@ -1566,6 +1566,10 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 598023883777432017, guid: 7c5f85223c6aa9f49a066103c63320ea, type: 3}
+      propertyPath: weaponType
+      value: rifle
+      objectReference: {fileID: 0}
     - target: {fileID: 598721521496107697, guid: 7c5f85223c6aa9f49a066103c63320ea, type: 3}
       propertyPath: m_Name
       value: Rifle
@@ -1581,6 +1585,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450651763639101}
+  - component: {fileID: 919132147777001864}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -1588,6 +1593,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &919132147777001864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132147777001863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3122c8a5dfe6424188a0eb73d23788d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType: 
+  damage: 0
+  range: 0
+  fireRate: 0
+  ammo: 0
 --- !u!23 &1305037035165124108
 MeshRenderer:
   m_ObjectHideFlags: 0

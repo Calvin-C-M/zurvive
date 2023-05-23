@@ -45,7 +45,7 @@ public class WeaponBehaviour : MonoBehaviour
         this.reloadSound = sounds[1];
 
         // Control weapon attributes
-        this.weaponType = "rifle";
+        this.weaponType = (this.weaponType == "") ? "rifle" : this.weaponType.ToLower(); 
         this.weaponDictionary = new WeaponDict();
         this.damage = this.weaponDictionary.attribute[weaponType]["damage"];
         this.range = this.weaponDictionary.attribute[weaponType]["range"];
