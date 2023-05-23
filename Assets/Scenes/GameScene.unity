@@ -1793,7 +1793,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 919132147777001863}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3122c8a5dfe6424188a0eb73d23788d, type: 3}
+  m_Script: {fileID: 11500000, guid: eba5554445483154b9f84e470f4898e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: sword

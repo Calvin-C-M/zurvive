@@ -11,6 +11,7 @@ public class WeaponBehaviour : MonoBehaviour
     public float fireRate;
     public float ammo;
     protected float initAmmo;
+    protected bool allowFire;
     protected WeaponDict weaponDictionary;
 
 
@@ -25,11 +26,34 @@ public class WeaponBehaviour : MonoBehaviour
         this.fireRate = this.weaponDictionary.attribute[weaponType]["fireRate"];
         this.initAmmo = this.weaponDictionary.attribute[weaponType]["initAmmo"];
         this.ammo = this.initAmmo;
+        this.allowFire = true;
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    protected void HitZombie()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if(Physics.Raycast(ray, out hit, this.range))
+        {
+            GameObject zombie = hit.collider.gameObject;
+            ZombieBehaviour zombieAttr = zombie.GetComponent<ZombieBehaviour>();
+            CharacterBehaviour characterAttr = GetComponentInParent<CharacterBehaviour>();
+            if(zombieAttr != null)
+            {
+                zombieAttr.TakeDamage(this.damage);
+                if(zombieAttr.health <= 0)
+                {
+                    Destroy(zombie);
+                    characterAttr.killCounter++;
+                }
+            }
+        }
     }
 }

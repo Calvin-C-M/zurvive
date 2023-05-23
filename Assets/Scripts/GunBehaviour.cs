@@ -6,7 +6,6 @@ using TMPro;
 public class GunBehaviour : WeaponBehaviour
 {
     protected bool isReloading;
-    protected bool allowFire;
     protected TMP_Text ammoText;
     protected ParticleSystem[] muzzleParticles;
     protected GameObject muzzleLight;
@@ -18,7 +17,6 @@ public class GunBehaviour : WeaponBehaviour
     {
         base.Init();
         this.isReloading = false;
-        this.allowFire = true;
 
         // Control muzzle particle attributes
         this.muzzleParticles = GetComponentsInChildren<ParticleSystem>();
@@ -66,25 +64,7 @@ public class GunBehaviour : WeaponBehaviour
         this.ChangeAmmoText();
         this.firingSound.Play();
         StartCoroutine(this.ToggleMuzzleFlash());
-
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if(Physics.Raycast(ray, out hit, this.range))
-        {
-            GameObject zombie = hit.collider.gameObject;
-            ZombieBehaviour zombieAttr = zombie.GetComponent<ZombieBehaviour>();
-            CharacterBehaviour characterAttr = GetComponentInParent<CharacterBehaviour>();
-            if(zombieAttr != null)
-            {
-                zombieAttr.TakeDamage(this.damage);
-                if(zombieAttr.health <= 0)
-                {
-                    Destroy(zombie);
-                    characterAttr.killCounter++;
-                }
-            }
-        }
+        this.HitZombie();
     }
 
     private void Reload()
