@@ -15354,7 +15354,7 @@ GameObject:
   - component: {fileID: 595229896934818397}
   - component: {fileID: 592688287819169181}
   - component: {fileID: 584674029482901715}
-  - component: {fileID: 598023883777432017}
+  - component: {fileID: 3153114700835657883}
   m_Layer: 0
   m_Name: Rifle
   m_TagString: Untagged
@@ -15433,7 +15433,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &598023883777432017
+--- !u!114 &3153114700835657883
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15442,10 +15442,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 598721521496107697}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3122c8a5dfe6424188a0eb73d23788d, type: 3}
+  m_Script: {fileID: 11500000, guid: 577dfeb20bcfac44fa7f055ee66c1534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
-  range: 15
-  fireRate: 0.3
+  weaponType: 
+  damage: 0
+  range: 0
+  fireRate: 0
   ammo: 0
