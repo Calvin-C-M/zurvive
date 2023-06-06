@@ -1,37 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class Spawner : MonoBehaviour
 {
     public int totalZombies;
-
     public GameObject zombie;
-    public float spawnInterval; // In minutes
-    public int currentWave;
-    private int initWave;
-    private TMP_Text waveText;
-    private bool canSpawn;
+    private Wave waveMaster;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject waveObject = GameObject.Find("WaveMaster");
+        this.waveMaster = waveObject.GetComponentInChildren<Wave>();
+
         this.totalZombies = 3;
-        this.spawnInterval = 2f;
-        this.initWave = 0;
-        this.currentWave = this.initWave;
-        this.waveText = GetComponentInChildren<TMP_Text>();
-        this.canSpawn = true;
+        this.zombie = Resources.Load("Enemy") as GameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(this.canSpawn)
+        if(this.waveMaster.canSpawn)
         {
-            StartCoroutine(this.ChangeWave());
+            this.SpawnZombie();
         }
     }
 
@@ -43,21 +36,5 @@ public class Spawner : MonoBehaviour
             spawnPos.x += i;
             Instantiate(zombie, spawnPos, Quaternion.identity);
         }
-    }
-
-    private void SetWave()
-    {
-        this.currentWave++;
-        this.waveText.text = "Wave \n" + this.currentWave;
-        this.SpawnZombie();
-    }
-
-    private IEnumerator ChangeWave()
-    {
-        this.SetWave();
-        float second = 6f;
-        this.canSpawn = false;
-        yield return new WaitForSeconds(this.spawnInterval * second);
-        this.canSpawn = true;
     }
 }

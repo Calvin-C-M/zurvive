@@ -1108,8 +1108,9 @@ GameObject:
   - component: {fileID: 1573445932}
   - component: {fileID: 1573445931}
   - component: {fileID: 1573445930}
+  - component: {fileID: 1573445933}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: WaveMaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1128,8 +1129,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 388318481}
-  m_Father: {fileID: 1660318138}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1197,6 +1198,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1573445933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573445928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3887aaafa19a546a451e53a4af2e12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canSpawn: 0
+  spawnInterval: 0
+  currentWave: 0
 --- !u!1 &1591112300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1461,8 +1477,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 18.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1573445929}
+  m_Children: []
   m_Father: {fileID: 1024687973}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1542,7 +1557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalZombies: 0
-  zombie: {fileID: 5830067930569979887, guid: 1ce2c9ad2d9bf974290dcb407f5fb7c6, type: 3}
+  zombie: {fileID: 0}
   spawnInterval: 0
   currentWave: 0
 --- !u!1 &2129007453
@@ -1763,7 +1778,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3153114700835657883, guid: 7c5f85223c6aa9f49a066103c63320ea, type: 3}
       propertyPath: weaponType
-      value: rifle
+      value: pistol
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c5f85223c6aa9f49a066103c63320ea, type: 3}
