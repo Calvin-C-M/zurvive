@@ -10,7 +10,6 @@ public class ButtonHandling : MonoBehaviour
     void Start()
     {
         this.pauseMenu = GameObject.Find("PauseMenu");
-        Debug.Log(this.pauseMenu);
     }
 
     public void ResumeGame()
