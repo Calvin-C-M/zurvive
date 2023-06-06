@@ -18,9 +18,12 @@ public class SwordBehaviour : WeaponBehaviour
 
     private void Controls()
     {
-        if(Input.GetMouseButton(0) && this.allowFire)
+        if(Time.timeScale > 0)
         {
-            StartCoroutine(this.Swing());
+            if(Input.GetMouseButton(0) && this.allowFire)
+            {
+                StartCoroutine(this.Swing());
+            }
         }
     }
 

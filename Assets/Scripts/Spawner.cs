@@ -22,9 +22,12 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(this.waveMaster.canSpawn)
+        if(Time.timeScale > 0)
         {
-            this.SpawnZombie();
+            if(this.waveMaster.canSpawn)
+            {
+                this.SpawnZombie();
+            }
         }
     }
 

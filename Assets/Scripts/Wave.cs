@@ -24,9 +24,12 @@ public class Wave : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(this.canSpawn) 
+        if(Time.timeScale > 0)
         {
-            StartCoroutine(ChangeWave());
+            if(this.canSpawn) 
+            {
+                StartCoroutine(ChangeWave());
+            }
         }
     }
 

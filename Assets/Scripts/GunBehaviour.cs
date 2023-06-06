@@ -48,13 +48,16 @@ public class GunBehaviour : WeaponBehaviour
     
     private void Controls()
     {
-        if(Input.GetMouseButton(0) && this.allowFire && this.ammo > 0 && !this.isReloading)
+        if(Time.timeScale > 0)
         {
-            StartCoroutine(this.Shoot());
-        }
-        if(Input.GetKeyDown("r"))
-        {
-            this.Reload();
+            if(Input.GetMouseButton(0) && this.allowFire && this.ammo > 0 && !this.isReloading)
+            {
+                StartCoroutine(this.Shoot());
+            }
+            if(Input.GetKeyDown("r"))
+            {
+                this.Reload();
+            }
         }
     }
 

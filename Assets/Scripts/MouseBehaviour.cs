@@ -21,16 +21,19 @@ public class MouseBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxis("Mouse X") * this.sensitivity;
-        float y = Input.GetAxis("Mouse Y") * -this.sensitivity;
+        if(Time.timeScale > 0)
+        {
+            float x = Input.GetAxis("Mouse X") * this.sensitivity;
+            float y = Input.GetAxis("Mouse Y") * -this.sensitivity;
 
-        this.player.transform.Rotate(0,x,0);
+            this.player.transform.Rotate(0,x,0);
 
-        this.yRot += x;
+            this.yRot += x;
 
-        // Kondisional digunakan agar player tidak dapat merotasikan kamera 360 derajat secara vertikal
-        this.xRot = (this.xRot+y > 90) ? 90 : (this.xRot+y < -90) ? -90 : this.xRot + y;
+            // Kondisional digunakan agar player tidak dapat merotasikan kamera 360 derajat secara vertikal
+            this.xRot = (this.xRot+y > 90) ? 90 : (this.xRot+y < -90) ? -90 : this.xRot + y;
 
-        this.transform.eulerAngles = new Vector3(this.xRot, this.yRot, 0.0f);
+            this.transform.eulerAngles = new Vector3(this.xRot, this.yRot, 0.0f);
+        }
     }
 }

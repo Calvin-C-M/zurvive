@@ -42,7 +42,10 @@ public class ZombieBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.Movement();
+        if(Time.timeScale > 0)
+        {
+            this.Movement();
+        }
     }
 
     IEnumerator Attack(GameObject player)
