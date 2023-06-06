@@ -27,5 +27,13 @@ public class WeaponDict
                 {"fireRate", 0.4f},
                 {"initAmmo", 15f}
             }},
+
+            {"submachine", new Dictionary<string, float>()
+            {
+                {"damage", 2.5f},
+                {"range", 12.5f},
+                {"fireRate", 0.2f},
+                {"initAmmo", 25f}
+            }}
         };
 }
