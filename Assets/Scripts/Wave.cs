@@ -17,7 +17,7 @@ public class Wave : MonoBehaviour
         this.spawnInterval = 2f;
         this.initWave = 0;
         this.currentWave = this.initWave;
-        this.waveText = GetComponentInChildren<TMP_Text>();
+        this.waveText = GetComponentsInChildren<TMP_Text>()[0];
         this.canSpawn = true;   
     }
 
@@ -42,7 +42,7 @@ public class Wave : MonoBehaviour
     private IEnumerator ChangeWave()
     {
         this.SetWave();
-        float second = 6f;
+        float second = 60f;
         this.canSpawn = false;
         yield return new WaitForSeconds(this.spawnInterval * second);
         this.canSpawn = true;

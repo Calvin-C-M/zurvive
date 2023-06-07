@@ -11,6 +11,7 @@ public class CharacterBehaviour : MonoBehaviour
     public float health;
     public int killCounter;
     public GameObject pauseMenu;
+    public GameObject gameOver;
 
     private float initHealth;
     private Rigidbody rb;
@@ -43,6 +44,7 @@ public class CharacterBehaviour : MonoBehaviour
         this.secondary.SetActive(false);
 
         this.pauseMenu.SetActive(false);
+        this.gameOver.SetActive(false);
     }
 
     // Update is called once per frame
@@ -50,11 +52,16 @@ public class CharacterBehaviour : MonoBehaviour
     {
         this.KeyInput();
         this.killCounterText.text = this.killCounter.ToString(); // Update kill counter text
-        this.UpdatePauseMenuStats();
-        if(this.health < 0)
+        this.UpdatePanelStats();
+        if(this.health <= 0)
         {
             Debug.Log("Player is dead");
-            Destroy(this.gameObject);
+            this.gameOver.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0.0f;
+
+            // Destroy(this.gameObject);
         }
     }
 
@@ -118,16 +125,18 @@ public class CharacterBehaviour : MonoBehaviour
         }
     }
 
-    private void UpdatePauseMenuStats()
+    private void UpdatePanelStats()
     {
         TMP_Text pauseWaveCounter = this.pauseMenu.GetComponentsInChildren<TMP_Text>()[0];
         TMP_Text pauseKillCounter = this.pauseMenu.GetComponentsInChildren<TMP_Text>()[1];
+        TMP_Text endKillCounter = this.gameOver.GetComponentsInChildren<TMP_Text>()[1];
 
         GameObject waveMaster = GameObject.Find("WaveMaster");
         Wave wave = waveMaster.GetComponentInChildren<Wave>();
 
         pauseKillCounter.text = "Kills: " + this.killCounter;
         pauseWaveCounter.text = "Wave: " + wave.currentWave;
+        endKillCounter.text = "Kills: " + this.killCounter;
     }
 
     public void TakeDamage(float damage)

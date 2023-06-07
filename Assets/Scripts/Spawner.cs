@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour
         this.waveMaster = waveObject.GetComponentInChildren<Wave>();
 
         this.totalZombies = 3;
-        this.zombie = Resources.Load("Enemy") as GameObject;
+        this.zombie = Resources.Load("Zombie") as GameObject;
     }
 
     // Update is called once per frame
@@ -28,6 +28,7 @@ public class Spawner : MonoBehaviour
             {
                 this.SpawnZombie();
             }
+
         }
     }
 
