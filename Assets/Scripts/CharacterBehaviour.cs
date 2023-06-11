@@ -13,6 +13,7 @@ public class CharacterBehaviour : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject gameOver;
 
+    private bool isGrounded;
     private float initHealth;
     private float initHealthBarWidth;
     private Rigidbody rb;
@@ -22,7 +23,6 @@ public class CharacterBehaviour : MonoBehaviour
     private GameObject healthBar;
     private GameObject primary;
     private GameObject secondary;
-    private GameObject ground;
 
     // Start is called before the first frame update
     void Start()
@@ -31,13 +31,13 @@ public class CharacterBehaviour : MonoBehaviour
 
         this.rb = GetComponent<Rigidbody>();
         this.cam = Camera.main;
-        this.ground = GameObject.Find("Map");
         this.healthText = GetComponentsInChildren<TMP_Text>()[1];
         this.killCounterText = GetComponentsInChildren<TMP_Text>()[2];
         this.primary = GameObject.Find("Primary");
         this.secondary = GameObject.Find("Sword");
         this.healthBar = GameObject.Find("Health");
 
+        this.isGrounded = true;
         this.killCounter = 0;
         this.walkingSpd = 10.0f;
         this.runningSpd = 5.0f;
@@ -51,6 +51,22 @@ public class CharacterBehaviour : MonoBehaviour
 
         this.pauseMenu.SetActive(false);
         this.gameOver.SetActive(false);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.name == "MapFinal")
+        {
+            this.isGrounded = true;
+        }
+    }
+    
+    void OnCollisionExit(Collision collision)
+    {
+        if(collision.gameObject.name == "MapFinal")
+        {
+            this.isGrounded = false;
+        }
     }
 
     // Update is called once per frame
@@ -96,7 +112,7 @@ public class CharacterBehaviour : MonoBehaviour
             {
                 this.transform.Translate(Vector3.right * velocity * Time.deltaTime);
             }
-            if(Input.GetKeyDown(KeyCode.Space)) // Jumping
+            if(Input.GetKeyDown(KeyCode.Space) && this.isGrounded) // Jumping
             {
                 this.rb.velocity = new Vector3(0,this.jumpHeight,0);
             }
