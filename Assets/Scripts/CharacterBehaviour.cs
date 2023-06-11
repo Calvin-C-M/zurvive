@@ -14,10 +14,12 @@ public class CharacterBehaviour : MonoBehaviour
     public GameObject gameOver;
 
     private float initHealth;
+    private float initHealthBarWidth;
     private Rigidbody rb;
     private Camera cam;
     private TMP_Text killCounterText;
     private TMP_Text healthText;
+    private GameObject healthBar;
     private GameObject primary;
     private GameObject secondary;
     private GameObject ground;
@@ -34,6 +36,7 @@ public class CharacterBehaviour : MonoBehaviour
         this.killCounterText = GetComponentsInChildren<TMP_Text>()[2];
         this.primary = GameObject.Find("Rifle");
         this.secondary = GameObject.Find("Sword");
+        this.healthBar = GameObject.Find("Health");
 
         this.killCounter = 0;
         this.walkingSpd = 10.0f;
@@ -42,6 +45,9 @@ public class CharacterBehaviour : MonoBehaviour
         this.initHealth = 50.0f;
         this.health = this.initHealth;
         this.secondary.SetActive(false);
+
+        RectTransform healthBarRect = this.healthBar.transform as RectTransform;
+        this.initHealthBarWidth = healthBarRect.sizeDelta.x;
 
         this.pauseMenu.SetActive(false);
         this.gameOver.SetActive(false);
@@ -60,8 +66,6 @@ public class CharacterBehaviour : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0.0f;
-
-            // Destroy(this.gameObject);
         }
     }
 
@@ -141,8 +145,17 @@ public class CharacterBehaviour : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        // Take damage handling
         this.health -= damage;
         float currHealth = (this.health / this.initHealth) * 100;
+        Debug.Log(currHealth);
+
+        // Change health text
         this.healthText.text = Mathf.Round(currHealth) + "%";
+
+        // Change health bar width
+        RectTransform healthBarRect = this.healthBar.transform as RectTransform;
+        float newWidth = this.initHealthBarWidth * (currHealth/100);
+        healthBarRect.sizeDelta = new Vector2(newWidth,healthBarRect.sizeDelta.y);
     }
 }
