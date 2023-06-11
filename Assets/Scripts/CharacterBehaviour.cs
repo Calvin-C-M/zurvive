@@ -9,12 +9,13 @@ public class CharacterBehaviour : MonoBehaviour
     public float runningSpd;
     public float jumpHeight;
     public float health;
+    public float initHealth;
+
     public int killCounter;
     public GameObject pauseMenu;
     public GameObject gameOver;
 
     private bool isGrounded;
-    private float initHealth;
     private float initHealthBarWidth;
     private Rigidbody rb;
     private Camera cam;
@@ -163,15 +164,28 @@ public class CharacterBehaviour : MonoBehaviour
     {
         // Take damage handling
         this.health -= damage;
-        float currHealth = (this.health / this.initHealth) * 100;
-        Debug.Log(currHealth);
+
+        this.ChangeHealthAttributes();
+    }
+
+    public void Heal(float healValue)
+    {
+        // Add health handling
+        this.health += healValue;
+
+        this.ChangeHealthAttributes();
+    }
+
+    private void ChangeHealthAttributes()
+    {
+        float currentHealth = (this.health / this.initHealth) * 100;
 
         // Change health text
-        this.healthText.text = Mathf.Round(currHealth) + "%";
+        this.healthText.text = Mathf.Round(currentHealth) + "%";
 
         // Change health bar width
         RectTransform healthBarRect = this.healthBar.transform as RectTransform;
-        float newWidth = this.initHealthBarWidth * (currHealth/100);
+        float newWidth = this.initHealthBarWidth * (currentHealth/100);
         healthBarRect.sizeDelta = new Vector2(newWidth,healthBarRect.sizeDelta.y);
     }
 }
