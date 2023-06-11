@@ -34,7 +34,7 @@ public class CharacterBehaviour : MonoBehaviour
         this.ground = GameObject.Find("Map");
         this.healthText = GetComponentsInChildren<TMP_Text>()[1];
         this.killCounterText = GetComponentsInChildren<TMP_Text>()[2];
-        this.primary = GameObject.Find("Rifle");
+        this.primary = GameObject.Find("Primary");
         this.secondary = GameObject.Find("Sword");
         this.healthBar = GameObject.Find("Health");
 

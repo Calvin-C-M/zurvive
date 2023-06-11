@@ -5566,7 +5566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 598721521496107697, guid: 7c5f85223c6aa9f49a066103c63320ea, type: 3}
       propertyPath: m_Name
-      value: Rifle
+      value: Primary
       objectReference: {fileID: 0}
     - target: {fileID: 3153114700835657883, guid: 7c5f85223c6aa9f49a066103c63320ea, type: 3}
       propertyPath: weaponType
