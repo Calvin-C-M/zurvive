@@ -14,7 +14,7 @@ public class Wave : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.spawnInterval = 2f;
+        this.spawnInterval = 1f;
         this.initWave = 0;
         this.currentWave = this.initWave;
         this.waveText = GetComponentsInChildren<TMP_Text>()[0];

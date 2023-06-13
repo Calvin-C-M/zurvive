@@ -71,7 +71,8 @@ public class ZombieBehaviour : MonoBehaviour
 
     private void Movement()
     {
-        this.transform.LookAt(player.transform);
+        Vector3 playerPos = new Vector3(player.transform.position.x, this.transform.position.y, player.transform.position.z);
+        this.transform.LookAt(playerPos);
         this.transform.Translate(Vector3.forward * this.speed * Time.deltaTime);
     }
 }
